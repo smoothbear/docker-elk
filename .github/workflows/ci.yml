@@ -62,6 +62,12 @@ jobs:
 
           .github/workflows/scripts/elasticsearch-setup-passwords.exp
 
+      - name: Create Folder
+        run: |
+          # Create folder for nginx
+
+          mkdir /home/runner/work/docker-elk/docker-elk/nginx
+          mkdir /home/runner/work/docker-elk/docker-elk/nginx_log
       ##########################################################
       #                                                        #
       # Test core components: Elasticsearch, Logstash, Kibana. #
