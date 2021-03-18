@@ -18,3 +18,5 @@ filebeat:
       fields_under_root: true
       fields:
         type: nginx-access
+      username: "best_user"
+      password: "changeme"
