@@ -69,6 +69,21 @@ services:
     depends_on:
       - elasticsearch
 
+  nginx:
+    build:
+      context: nginx-filebeat/
+    volumes:
+      - type: bind
+        source: ./nginx
+        target: /etc/nginx
+      - type: bind
+        source: ./nginx_log
+        target: /var/log
+    ports:
+      - "80:80"
+    networks:
+      - elk
+      
 networks:
   elk:
     driver: bridge

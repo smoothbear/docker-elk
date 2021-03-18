@@ -83,7 +83,7 @@ jobs:
           docker-compose logs elasticsearch
           docker-compose logs logstash
           docker-compose logs kibana
-
+          docker-compose logs nginx
 
         ##############
         #            #
