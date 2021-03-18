@@ -33,6 +33,9 @@ jobs:
 
           sudo apt install -y expect
 
+          # Set password before building images
+          sed -i 's/changeme/testpasswd/' nginx-filebeat/start.sh
+
           # Pre-build container images
 
           docker-compose build
@@ -47,11 +50,9 @@ jobs:
         run: |
 
           # Change password of 'elastic' user from 'changeme' to 'testpasswd' in config files
-
           sed -i -e 's/\(xpack.monitoring.elasticsearch.username:\) elastic/\1 logstash_system/g' -e 's/\(xpack.monitoring.elasticsearch.password:\) changeme/\1 testpasswd/g' logstash/config/logstash.yml
           sed -i 's/\(password =>\) "changeme"/\1 "testpasswd"/g' logstash/pipeline/logstash.conf
           sed -i -e 's/\(elasticsearch.username:\) elastic/\1 kibana_system/g' -e 's/\(elasticsearch.password:\) changeme/\1 testpasswd/g' kibana/config/kibana.yml
-          sed -i -e 's/"elastic:changeme"/"elastic:testpasswd"/g' nginx-filebeat/start.sh
 
           # Run Elasticsearch and wait for its availability
 
