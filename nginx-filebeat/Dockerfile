@@ -48,10 +48,6 @@ RUN rm /var/log/nginx/access.log /var/log/nginx/error.log
 ADD filebeat.yml /etc/filebeat/filebeat.yml
 RUN chmod 644 /etc/filebeat/filebeat.yml
 
-# CA cert
-RUN mkdir -p /etc/pki/tls/certs
-ADD logstash-beats.crt /etc/pki/tls/certs/logstash-beats.crt
-
 # create template based on filebeat version (assumption: it is the same version as elasticsearch version)
 RUN filebeat export template --es.version ${FILEBEAT_BASE_VERSION} > /etc/filebeat/filebeat.template.json
 
